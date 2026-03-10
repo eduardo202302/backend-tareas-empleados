@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import { prisma } from "../lib/prisma";
 
 export const createUsuario = async (req: Request, res: Response) => {
+    console.log("body recibido:", req.body);
   try {
+    
     const user = await prisma.user.create({
       data: {
         name: req.body.name,
@@ -10,13 +12,14 @@ export const createUsuario = async (req: Request, res: Response) => {
         cumpleaños: req.body.cumpleaños,
         direccion: req.body.direccion,
         cedula: req.body.cedula,
+        ciudad: req.body.ciudad,
         email: req.body.email,
         telefono: req.body.telefono,
       },
     });
     res.json({ message: "Usuario creado correctamente", data: user });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ error: "Error al crear el usuario" });
   }
 };
@@ -58,6 +61,7 @@ export const updateUsuario = async (req: Request, res: Response) => {
         telefono: req.body.telefono,
         cedula: req.body.cedula,
         sueldo: req.body.sueldo,
+        ciudad: req.body.ciudad,
         direccion: req.body.direccion,
         cumpleaños: req.body.cumpleaños,
       },

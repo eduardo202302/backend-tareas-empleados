@@ -21,15 +21,15 @@ model User {
   direccion String
   cedula String
   email String
+  ciudad  String
   telefono String
   tareas   Tarea[]  
 }
-
 model Tarea {
   id          Int      @id @default(autoincrement())
   name        String
   descripcion String
-  completada  Boolean  @default(false)  // ← agrega esto
+  completada  Boolean  @default(false)
   userId      Int
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
